@@ -2,3 +2,5 @@
 *.key
 *.crt
 .env
+__pycache__/
+.venv/
