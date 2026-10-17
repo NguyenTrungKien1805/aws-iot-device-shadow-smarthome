@@ -1,0 +1,36 @@
+[2026-10-18 00:18:33] [smart-light] Đang kết nối tới AWS IoT Core (THAY_ENDPOINT_CUA_BAN_VAO_DAY)...
+[2026-10-18 00:20:08] [smart-light] Đang kết nối tới AWS IoT Core (THAY_ENDPOINT_CUA_BAN_VAO_DAY)...
+[2026-10-18 00:21:00] [smart-light] Đang kết nối tới AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-18 00:21:02] [smart-light] Kết nối THÀNH CÔNG!
+[2026-10-18 00:22:22] [smart-light] Äang káº¿t ná»‘i tá»›i AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-18 00:22:23] [smart-light] Káº¿t ná»‘i THÃ€NH CÃ”NG!
+[2026-10-18 00:23:13] [smart-light] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-18 00:23:15] [smart-light] Ket noi THANH CONG!
+[2026-10-18 00:23:15] [smart-light] Dang lang nghe lenh dieu khien tai: $aws/things/smart-light/shadow/update/delta
+[2026-10-18 00:23:15] [smart-light] Da dong bo trang thai ban dau (reported): {"power": "OFF", "brightness": 0}
+[2026-10-18 00:23:15] [smart-ac] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-18 00:23:16] [smart-ac] Ket noi THANH CONG!
+[2026-10-18 00:23:17] [smart-ac] Dang lang nghe lenh dieu khien tai: $aws/things/smart-ac/shadow/update/delta
+[2026-10-18 00:23:17] [smart-ac] Da dong bo trang thai ban dau (reported): {"power": "OFF", "temperature": 24, "mode": "cool"}
+[2026-10-18 00:23:17] [smart-fan] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-18 00:23:18] [smart-fan] Ket noi THANH CONG!
+[2026-10-18 00:23:18] [smart-fan] Dang lang nghe lenh dieu khien tai: $aws/things/smart-fan/shadow/update/delta
+[2026-10-18 00:23:19] [smart-fan] Da dong bo trang thai ban dau (reported): {"power": "OFF", "speed": 1}
+[2026-10-18 00:23:25] [smart-light] Da ngat ket noi an toan.
+[2026-10-18 00:23:25] [smart-ac] Da ngat ket noi an toan.
+[2026-10-18 00:23:25] [smart-fan] Da ngat ket noi an toan.
+[2026-10-18 00:27:49] [smart-light] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-18 00:27:51] [smart-light] Ket noi THANH CONG!
+[2026-10-18 00:27:51] [smart-light] Dang lang nghe lenh dieu khien tai: $aws/things/smart-light/shadow/update/delta
+[2026-10-18 00:27:51] [smart-light] Da dong bo trang thai ban dau (reported): {"power": "OFF", "brightness": 0}
+[2026-10-18 00:27:51] [smart-ac] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-18 00:27:52] [smart-ac] Ket noi THANH CONG!
+[2026-10-18 00:27:53] [smart-ac] Dang lang nghe lenh dieu khien tai: $aws/things/smart-ac/shadow/update/delta
+[2026-10-18 00:27:53] [smart-ac] Da dong bo trang thai ban dau (reported): {"power": "OFF", "temperature": 24, "mode": "cool"}
+[2026-10-18 00:27:53] [smart-fan] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-18 00:27:54] [smart-fan] Ket noi THANH CONG!
+[2026-10-18 00:27:54] [smart-fan] Dang lang nghe lenh dieu khien tai: $aws/things/smart-fan/shadow/update/delta
+[2026-10-18 00:27:55] [smart-fan] Da dong bo trang thai ban dau (reported): {"power": "OFF", "speed": 1}
+[2026-10-18 00:30:02] [smart-light] Nhan ban tin DELTA tu topic '$aws/things/smart-light/shadow/update/delta': {"version":4,"timestamp":1792258202,"state":{"power":"ON","brightness":85},"metadata":{"power":{"timestamp":1792258202},"brightness":{"timestamp":1792258202}}}
+[2026-10-18 00:30:02] [smart-light] Da cap nhat trang thai thiet bi thanh: {"power": "ON", "brightness": 85}
+[2026-10-18 00:30:02] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "brightness": 85}}}
