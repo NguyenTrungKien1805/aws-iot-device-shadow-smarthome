@@ -1,6 +1,6 @@
+certs/
+.vs/
 *.pem
 *.key
 *.crt
 .env
-__pycache__/
-.venv/
