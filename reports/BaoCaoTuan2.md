@@ -80,7 +80,7 @@ Các kết quả đã có minh chứng trong repository:
 | Ngày thực hiện | Thành viên | Nội dung công việc | Thời gian |
 |---|---|---|---|
 | 12/10/2026 | Trần Nguyễn Minh Hiếu | Tạo Thing, certificate, IoT Policy; tải certificate; kiểm thử MQTT test client | 4 giờ |
-| 13/10/2026 | Trần Nguyễn Minh Hiếu | Viết chương trình Python 3 thiết bị; kiểm thử nhận delta và cập nhật reported | 4 giờ |
+| 18/10/2026 | Trần Nguyễn Minh Hiếu | Viết chương trình Python 3 thiết bị; kiểm thử nhận delta và cập nhật reported (log simulator ghi nhận 00:18:33–00:30:02) | 4 giờ |
 | 14/10/2026 | Nguyễn Trung Kiên | Tạo bảng DynamoDB; viết và kiểm thử Lambda (test event trên Console) | 4 giờ |
 | 15/10/2026 | Nguyễn Trung Kiên | Cấu hình API Gateway, bật CORS, kiểm thử endpoint; kiểm tra S3 | 4 giờ |
 | **Tổng cộng** | 2 thành viên | | **16 giờ** |
@@ -113,7 +113,7 @@ Các kết quả đã có minh chứng trong repository:
 
 - Lấy endpoint dữ liệu của tài khoản (`aws iot describe-endpoint --endpoint-type iot:Data-ATS`) và kiểm thử publish/subscribe bằng **MQTT test client** trên Console.
 - Certificate/private key lưu trong thư mục `certs/` **đã được liệt kê trong `.gitignore`**, không đưa lên GitHub.
-#### b. Chương trình Python mô phỏng thiết bị và kiểm thử Device Shadow (4 giờ)
+#### b. Chương trình Python mô phỏng thiết bị và kiểm thử Device Shadow (4 giờ; log chạy ngày 18/10/2026)
 
 Mỗi thiết bị là một tiến trình Python kết nối MQTT bằng certificate, thực hiện:
 
@@ -156,7 +156,7 @@ mqtt.connect().result()
 mqtt.subscribe(f"$aws/things/{THING}/shadow/update/delta", qos=1, callback=on_delta)
 ```
 
-Kiểm thử: gửi `desired` từ Console (Shadow → Edit) → thiết bị nhận `delta` → cập nhật `reported` → `delta` biến mất. Ghi lại log và ảnh chụp.
+Kiểm thử: gửi `desired` từ Console (Shadow → Edit) → thiết bị nhận `delta` → cập nhật `reported` → `delta` biến mất. Log simulator ghi nhận các lượt chạy ngày 18/10/2026, từ 00:18:33 đến 00:30:02; đây là khoảng thời gian giữa bản ghi đầu tiên và cuối cùng, không phải thời lượng chạy liên tục.
 
 **Ảnh minh chứng chạy mô phỏng và cập nhật Device Shadow:**
 
@@ -238,10 +238,7 @@ Minh chứng GitHub:
 | IoT Core / MQTT | Publish/subscribe bằng MQTT test client | Nhận được thông điệp | Đã kiểm thử; ảnh MQTT test client ghi nhận thông điệp | [MQTT test client](docs/images/Week2Pic/MQTT%20test%20client_smarthome.png) |
 | Device Shadow | Đặt `desired` khác `reported` | Thiết bị nhận delta, cập nhật reported | Đạt với `smart-light`: nhận delta, cập nhật trạng thái và publish `reported` theo log | [Document Shadow](docs/images/Week2Pic/Update%20Device%20shadow%20document%20của%20smart-light.png), [log thay đổi](docs/images/Week2Pic/Simulate%20Recording%20Smart%20Light%20Device%20Shadow%20Changes.png) |
 | Python simulator | Chạy 3 thiết bị đồng thời | Cả 3 kết nối và phản hồi lệnh | Cả 3 thiết bị kết nối và subscribe; log ghi nhận `smart-light` phản hồi delta | [Ảnh chạy mô phỏng](docs/images/Week2Pic/Run%20simulation.png), [log](../logs/device_simulator.log) |
-| DynamoDB | Ghi và đọc 1 bản ghi mẫu | Bản ghi hiển thị đúng | Chưa có kết quả kiểm thử hoặc minh chứng trong repository | Chưa có |
-| Lambda | Test event hợp lệ / không hợp lệ | 200 / 400 | Chưa có kết quả kiểm thử hoặc minh chứng trong repository | Chưa có |
-| API Gateway | `curl` POST điều khiển đèn | Shadow `desired` được cập nhật | Chưa có kết quả kiểm thử hoặc minh chứng trong repository | Chưa có |
-| IoT Rule → DynamoDB | Cập nhật Shadow | Có bản ghi mới trong bảng | Chưa có kết quả kiểm thử hoặc minh chứng trong repository | Chưa có |
+
 
 **Lỗi gặp phải và cách khắc phục:**
 
