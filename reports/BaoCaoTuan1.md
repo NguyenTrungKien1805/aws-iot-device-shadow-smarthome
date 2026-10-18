@@ -77,7 +77,7 @@ Các công việc gồm:
 Nhóm thực hiện triển khai trên AWS Learner Lab theo yêu cầu của giảng viên. Các tài nguyên được tạo trong Region `us-east-1` và sử dụng quyền được cấp sẵn trong môi trường học tập. Trong quá trình thực hiện, nhóm tuân thủ các quy định về sử dụng tài nguyên và quản lý chi phí.
 
 **Hình 2. Giao diện AWS Management Console và Region triển khai**  
-![AWS Management Console](./docs/images/console-region.png)
+![AWS Management Console](./docs/images/Week1Pic/console-region.png)
 
 ### 2.5. Tìm hiểu và chuẩn bị VPC
 Nhóm tìm hiểu về VPC để nắm được cách AWS tổ chức một mạng riêng cho các tài nguyên khi cần sử dụng trong hệ thống.
@@ -87,7 +87,7 @@ VPC cho phép xác định phạm vi mạng, dải địa chỉ IP và các thi�
 Trong tuần đầu, nhóm xem xét nhu cầu sử dụng mạng của đề tài và kiểm tra môi trường hiện có. Do chương trình Python có thể chạy trên máy tính cá nhân và kết nối đến AWS IoT Core qua Internet, nhóm không tạo thêm tài nguyên mạng nếu chưa cần thiết. Việc sử dụng VPC sẽ được thực hiện theo nhu cầu thực tế và quyền được cấp trong Learner Lab.
 
 **Hình 3. Thông tin VPC trong AWS Console**  
-![Thông tin VPC](./docs/images/vpc-console.png)
+![Thông tin VPC](./docs/images/Week1Pic/vpc-console.png)
 
 ### 2.6. Kiểm tra quyền IAM LabRole
 Nhóm tìm hiểu cách sử dụng quyền được cung cấp trong AWS Learner Lab để triển khai các dịch vụ cần thiết.
@@ -99,7 +99,7 @@ Nhóm xác định rằng các dịch vụ cần được cấp quyền phù h�
 Việc kiểm tra quyền ngay từ đầu giúp nhóm chủ động hơn khi triển khai các dịch vụ ở tuần 2 và hạn chế những lỗi do thiếu quyền truy cập.
 
 **Hình 4. Thông tin quyền hoặc LabRole được cấp trong môi trường học tập**  
-![Thông tin IAM LabRole](./docs/images/iam-labrole.png)
+![Thông tin IAM LabRole](./docs/images/Week1Pic/iam-labrole.png)
 
 ### 2.7. Chuẩn bị Amazon S3
 Nhóm tìm hiểu cách sử dụng Amazon S3 để lưu trữ các tệp giao diện website của hệ thống nhà thông minh.
@@ -111,7 +111,7 @@ Trong tuần đầu, nhóm xác định mục đích sử dụng S3, cách tạo
 Tên bucket sẽ được đặt theo quy tắc phù hợp với yêu cầu của AWS và khả năng sử dụng trong Learner Lab.
 
 **Hình 5. Bucket S3 dùng cho dự án nếu đã được tạo**  
-![Bucket S3](./docs/images/s3-tags.png)
+![Bucket S3](./docs/images/Week1Pic/s3-tags.png)
 
 ### 2.8. Gắn tag và quản lý tài nguyên
 Để thuận tiện trong quá trình triển khai, nhóm thống nhất cách đặt tên và gắn tag cho các tài nguyên AWS có hỗ trợ.
