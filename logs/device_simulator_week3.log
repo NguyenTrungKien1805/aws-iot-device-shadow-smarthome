@@ -1,0 +1,90 @@
+[2026-10-25 09:07:20] [smart-light] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:07:22] [smart-light] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:07:22] [smart-light] Dang lang nghe lenh dieu khien tai: $aws/things/smart-light/shadow/update/delta
+[2026-10-25 09:07:22] [smart-light] Dong bo trang thai ban dau (reported): {"power": "OFF", "brightness": 0}
+[2026-10-25 09:07:22] [smart-ac] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:07:22] [smart-light] Nhan ban tin DELTA tu '$aws/things/smart-light/shadow/update/delta': {"version":6,"timestamp":1792894046,"state":{"power":"ON","brightness":85},"metadata":{"power":{"timestamp":1792258202},"brightness":{"timestamp":1792258202}}}
+[2026-10-25 09:07:22] [smart-light] Cap nhat trang thai noi bo: {"power": "ON", "brightness": 85}
+[2026-10-25 09:07:22] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "brightness": 85}}}
+[2026-10-25 09:07:23] [smart-ac] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:07:24] [smart-ac] Dang lang nghe lenh dieu khien tai: $aws/things/smart-ac/shadow/update/delta
+[2026-10-25 09:07:24] [smart-ac] Dong bo trang thai ban dau (reported): {"power": "OFF", "temperature": 24, "mode": "cool"}
+[2026-10-25 09:07:24] [smart-fan] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:07:25] [smart-fan] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:07:25] [smart-fan] Dang lang nghe lenh dieu khien tai: $aws/things/smart-fan/shadow/update/delta
+[2026-10-25 09:07:26] [smart-fan] Dong bo trang thai ban dau (reported): {"power": "OFF", "speed": 1}
+[2026-10-25 09:09:19] [smart-light] Nhan ban tin DELTA tu '$aws/things/smart-light/shadow/update/delta': {"version":8,"timestamp":1792894162,"state":{"brightness":90},"metadata":{"brightness":{"timestamp":1792894162}}}
+[2026-10-25 09:09:19] [smart-light] Cap nhat trang thai noi bo: {"power": "ON", "brightness": 90}
+[2026-10-25 09:09:19] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "brightness": 90}}}
+[2026-10-25 09:09:35] [smart-ac] Nhan ban tin DELTA tu '$aws/things/smart-ac/shadow/update/delta': {"version":5,"timestamp":1792894178,"state":{"power":"ON","temperature":22},"metadata":{"power":{"timestamp":1792894178},"temperature":{"timestamp":1792894178}}}
+[2026-10-25 09:09:35] [smart-ac] Cap nhat trang thai noi bo: {"power": "ON", "temperature": 22, "mode": "cool"}
+[2026-10-25 09:09:35] [smart-ac] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "temperature": 22, "mode": "cool"}}}
+[2026-10-25 09:09:50] [smart-fan] Nhan ban tin DELTA tu '$aws/things/smart-fan/shadow/update/delta': {"version":5,"timestamp":1792894194,"state":{"power":"ON","speed":3},"metadata":{"power":{"timestamp":1792894194},"speed":{"timestamp":1792894194}}}
+[2026-10-25 09:09:50] [smart-fan] Cap nhat trang thai noi bo: {"power": "ON", "speed": 3}
+[2026-10-25 09:09:50] [smart-fan] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "speed": 3}}}
+[2026-10-25 09:11:57] [smart-light] Da ngat ket noi an toan.
+[2026-10-25 09:11:58] [smart-ac] Da ngat ket noi an toan.
+[2026-10-25 09:11:58] [smart-fan] Da ngat ket noi an toan.
+[2026-10-25 09:53:53] [smart-light] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:53:55] [smart-light] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:53:55] [smart-light] Nhan ban tin DELTA tu '$aws/things/smart-light/shadow/update/delta': {"version":11,"timestamp":1792895967,"state":{"brightness":80},"metadata":{"brightness":{"timestamp":1792895967}}}
+[2026-10-25 09:53:55] [smart-light] Cap nhat trang thai noi bo: {"power": "OFF", "brightness": 80}
+[2026-10-25 09:53:55] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "OFF", "brightness": 80}}}
+[2026-10-25 09:53:55] [smart-light] Nhan ban tin DELTA tu '$aws/things/smart-light/shadow/update/delta': {"version":10,"timestamp":1792895317,"state":{"brightness":80},"metadata":{"brightness":{"timestamp":1792895317}}}
+[2026-10-25 09:53:55] [smart-light] Cap nhat trang thai noi bo: {"power": "OFF", "brightness": 80}
+[2026-10-25 09:53:55] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "OFF", "brightness": 80}}}
+[2026-10-25 09:53:55] [smart-light] Dang lang nghe lenh dieu khien tai: $aws/things/smart-light/shadow/update/delta
+[2026-10-25 09:53:55] [smart-light] Nhan ban tin DELTA tu '$aws/things/smart-light/shadow/update/delta': {"version":12,"timestamp":1792896839,"state":{"power":"ON"},"metadata":{"power":{"timestamp":1792895967}}}
+[2026-10-25 09:53:55] [smart-light] Cap nhat trang thai noi bo: {"power": "ON", "brightness": 80}
+[2026-10-25 09:53:55] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "brightness": 80}}}
+[2026-10-25 09:53:55] [smart-light] Nhan ban tin DELTA tu '$aws/things/smart-light/shadow/update/delta': {"version":13,"timestamp":1792896839,"state":{"power":"ON"},"metadata":{"power":{"timestamp":1792895967}}}
+[2026-10-25 09:53:55] [smart-light] Cap nhat trang thai noi bo: {"power": "ON", "brightness": 80}
+[2026-10-25 09:53:55] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "brightness": 80}}}
+[2026-10-25 09:53:55] [smart-light] Dong bo trang thai ban dau (reported): {"power": "ON", "brightness": 80}
+[2026-10-25 09:53:55] [smart-ac] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:53:55] [smart-light] Nhan ban tin DELTA tu '$aws/things/smart-light/shadow/update/delta': {"version":14,"timestamp":1792896839,"state":{"power":"ON"},"metadata":{"power":{"timestamp":1792895967}}}
+[2026-10-25 09:53:55] [smart-light] Cap nhat trang thai noi bo: {"power": "ON", "brightness": 80}
+[2026-10-25 09:53:55] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "brightness": 80}}}
+[2026-10-25 09:53:57] [smart-ac] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:53:57] [smart-ac] Dang lang nghe lenh dieu khien tai: $aws/things/smart-ac/shadow/update/delta
+[2026-10-25 09:53:57] [smart-ac] Dong bo trang thai ban dau (reported): {"power": "OFF", "temperature": 24, "mode": "cool"}
+[2026-10-25 09:53:57] [smart-fan] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:53:57] [smart-ac] Nhan ban tin DELTA tu '$aws/things/smart-ac/shadow/update/delta': {"version":7,"timestamp":1792896841,"state":{"power":"ON","temperature":22},"metadata":{"power":{"timestamp":1792894178},"temperature":{"timestamp":1792894178}}}
+[2026-10-25 09:53:57] [smart-ac] Cap nhat trang thai noi bo: {"power": "ON", "temperature": 22, "mode": "cool"}
+[2026-10-25 09:53:57] [smart-ac] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "temperature": 22, "mode": "cool"}}}
+[2026-10-25 09:53:58] [smart-fan] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:53:59] [smart-fan] Dang lang nghe lenh dieu khien tai: $aws/things/smart-fan/shadow/update/delta
+[2026-10-25 09:53:59] [smart-fan] Dong bo trang thai ban dau (reported): {"power": "OFF", "speed": 1}
+[2026-10-25 09:53:59] [smart-fan] Nhan ban tin DELTA tu '$aws/things/smart-fan/shadow/update/delta': {"version":7,"timestamp":1792896843,"state":{"power":"ON","speed":3},"metadata":{"power":{"timestamp":1792894194},"speed":{"timestamp":1792894194}}}
+[2026-10-25 09:53:59] [smart-fan] Cap nhat trang thai noi bo: {"power": "ON", "speed": 3}
+[2026-10-25 09:53:59] [smart-fan] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "speed": 3}}}
+[2026-10-25 09:54:21] [smart-light] Da ngat ket noi an toan.
+[2026-10-25 09:54:21] [smart-ac] Da ngat ket noi an toan.
+[2026-10-25 09:54:21] [smart-fan] Da ngat ket noi an toan.
+[2026-10-25 09:54:33] [smart-light] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:54:34] [smart-light] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:54:35] [smart-light] Dang lang nghe lenh dieu khien tai: $aws/things/smart-light/shadow/update/delta
+[2026-10-25 09:54:35] [smart-light] Dong bo trang thai ban dau (reported): {"power": "OFF", "brightness": 0}
+[2026-10-25 09:54:35] [smart-ac] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:54:35] [smart-light] Nhan ban tin DELTA tu '$aws/things/smart-light/shadow/update/delta': {"version":18,"timestamp":1792896879,"state":{"power":"ON","brightness":80},"metadata":{"power":{"timestamp":1792895967},"brightness":{"timestamp":1792895967}}}
+[2026-10-25 09:54:35] [smart-light] Cap nhat trang thai noi bo: {"power": "ON", "brightness": 80}
+[2026-10-25 09:54:35] [smart-light] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "brightness": 80}}}
+[2026-10-25 09:54:37] [smart-ac] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:54:37] [smart-ac] Dang lang nghe lenh dieu khien tai: $aws/things/smart-ac/shadow/update/delta
+[2026-10-25 09:54:38] [smart-ac] Dong bo trang thai ban dau (reported): {"power": "OFF", "temperature": 24, "mode": "cool"}
+[2026-10-25 09:54:38] [smart-fan] Dang ket noi toi AWS IoT Core (a1vt5536hy0pad-ats.iot.us-east-1.amazonaws.com)...
+[2026-10-25 09:54:38] [smart-ac] Nhan ban tin DELTA tu '$aws/things/smart-ac/shadow/update/delta': {"version":9,"timestamp":1792896881,"state":{"power":"ON","temperature":22},"metadata":{"power":{"timestamp":1792894178},"temperature":{"timestamp":1792894178}}}
+[2026-10-25 09:54:38] [smart-ac] Cap nhat trang thai noi bo: {"power": "ON", "temperature": 22, "mode": "cool"}
+[2026-10-25 09:54:38] [smart-ac] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "temperature": 22, "mode": "cool"}}}
+[2026-10-25 09:54:40] [smart-fan] Ket noi THANH CONG (Least Privilege Policy)!
+[2026-10-25 09:54:41] [smart-fan] Dang lang nghe lenh dieu khien tai: $aws/things/smart-fan/shadow/update/delta
+[2026-10-25 09:54:41] [smart-fan] Dong bo trang thai ban dau (reported): {"power": "OFF", "speed": 1}
+[2026-10-25 09:54:41] [smart-fan] Nhan ban tin DELTA tu '$aws/things/smart-fan/shadow/update/delta': {"version":9,"timestamp":1792896885,"state":{"power":"ON","speed":3},"metadata":{"power":{"timestamp":1792894194},"speed":{"timestamp":1792894194}}}
+[2026-10-25 09:54:41] [smart-fan] Cap nhat trang thai noi bo: {"power": "ON", "speed": 3}
+[2026-10-25 09:54:41] [smart-fan] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "speed": 3}}}
+[2026-10-25 09:55:22] [smart-fan] Nhan ban tin DELTA tu '$aws/things/smart-fan/shadow/update/delta': {"version":11,"timestamp":1792896925,"state":{"speed":2},"metadata":{"speed":{"timestamp":1792896925}}}
+[2026-10-25 09:55:22] [smart-fan] Cap nhat trang thai noi bo: {"power": "ON", "speed": 2}
+[2026-10-25 09:55:22] [smart-fan] Da publish REPORTED len Shadow: {"state": {"reported": {"power": "ON", "speed": 2}}}
+[2026-10-25 10:08:39] [smart-light] Da ngat ket noi an toan.
+[2026-10-25 10:08:39] [smart-ac] Da ngat ket noi an toan.
+[2026-10-25 10:08:39] [smart-fan] Da ngat ket noi an toan.

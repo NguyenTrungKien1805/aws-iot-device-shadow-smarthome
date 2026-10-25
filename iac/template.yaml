@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: IaC Template cho bang DynamoDB luu lich su thiet bi Smart Home IoT
+Resources:
+  DeviceHistoryTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: SmartHomeDeviceHistoryIaC
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - { AttributeName: deviceId, AttributeType: S }
+        - { AttributeName: timestamp, AttributeType: N }
+      KeySchema:
+        - { AttributeName: deviceId, KeyType: HASH }
+        - { AttributeName: timestamp, KeyType: RANGE }
+      Tags:
+        - { Key: Project, Value: SmartHomeIoT }
+        - { Key: Owner1, Value: SV24110212 }
+        - { Key: Owner2, Value: SV24110263 }
