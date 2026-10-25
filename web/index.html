@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>AWS IoT Smart Home Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #232f3e;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 310px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+            .card h3 {
+                margin-top: 0;
+                color: #ff9900;
+                border-bottom: 2px solid #f0f0f0;
+                padding-bottom: 10px;
+            }
+
+        .control-group {
+            margin: 12px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        select, input[type="number"], input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #ff9900;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+            button:hover {
+                background: #e68a00;
+            }
+
+        .btn-secondary {
+            background: #232f3e;
+        }
+
+        .status-box {
+            background: #eef3f8;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+
+        .history-panel {
+            max-width: 1010px;
+            margin: 25px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #232f3e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>HỆ THỐNG NHÀ THÔNG MINH – AWS IoT CORE</h1>
+    <div class="subtitle">Nhóm Integration & IoT | SV: Trần Nguyễn Minh Hiếu (24110212) - Nguyễn Trung Kiên (24110263)</div>
+
+    <div class="grid">
+        <!-- SMART LIGHT -->
+        <div class="card">
+            <h3>💡 Smart Light (smart-light)</h3>
+            <div class="control-group">
+                <label>Nguồn (Power):</label>
+                <select id="light-power"><option value="ON">ON (Bật)</option><option value="OFF">OFF (Tắt)</option></select>
+            </div>
+            <div class="control-group">
+                <label>Độ sáng (0 - 100%):</label>
+                <input type="number" id="light-brightness" value="80" min="0" max="100">
+            </div>
+            <button onclick="sendControl('smart-light', {power: document.getElementById('light-power').value, brightness: Number(document.getElementById('light-brightness').value)})">Gửi lệnh điều khiển</button>
+            <button class="btn-secondary" onclick="loadHistory('smart-light')">Xem lịch sử DynamoDB</button>
+            <div id="status-smart-light" class="status-box">Chờ lệnh...</div>
+        </div>
+
+        <!-- SMART AC -->
+        <div class="card">
+            <h3>❄️ Smart AC (smart-ac)</h3>
+            <div class="control-group">
+                <label>Nguồn (Power):</label>
+                <select id="ac-power"><option value="ON">ON (Bật)</option><option value="OFF">OFF (Tắt)</option></select>
+            </div>
+            <div class="control-group">
+                <label>Nhiệt độ (16 - 30°C):</label>
+                <input type="number" id="ac-temp" value="22" min="16" max="30">
+            </div>
+            <div class="control-group">
+                <label>Chế độ (Mode):</label>
+                <select id="ac-mode"><option value="cool">Cool</option><option value="dry">Dry</option><option value="fan">Fan</option></select>
+            </div>
+            <button onclick="sendControl('smart-ac', {power: document.getElementById('ac-power').value, temperature: Number(document.getElementById('ac-temp').value), mode: document.getElementById('ac-mode').value})">Gửi lệnh điều khiển</button>
+            <button class="btn-secondary" onclick="loadHistory('smart-ac')">Xem lịch sử DynamoDB</button>
+            <div id="status-smart-ac" class="status-box">Chờ lệnh...</div>
+        </div>
+
+        <!-- SMART FAN -->
+        <div class="card">
+            <h3>🌀 Smart Fan (smart-fan)</h3>
+            <div class="control-group">
+                <label>Nguồn (Power):</label>
+                <select id="fan-power"><option value="ON">ON (Bật)</option><option value="OFF">OFF (Tắt)</option></select>
+            </div>
+            <div class="control-group">
+                <label>Tốc độ gió (1 - 3):</label>
+                <input type="number" id="fan-speed" value="2" min="1" max="3">
+            </div>
+            <button onclick="sendControl('smart-fan', {power: document.getElementById('fan-power').value, speed: Number(document.getElementById('fan-speed').value)})">Gửi lệnh điều khiển</button>
+            <button class="btn-secondary" onclick="loadHistory('smart-fan')">Xem lịch sử DynamoDB</button>
+            <div id="status-smart-fan" class="status-box">Chờ lệnh...</div>
+        </div>
+    </div>
+
+    <div class="history-panel">
+        <h3>📜 Lịch sử trạng thái thiết bị (Từ DynamoDB)</h3>
+        <table>
+            <thead><tr><th>Thiết bị (deviceId)</th><th>Thời gian (timestamp)</th><th>Sự kiện</th><th>Trạng thái (state)</th></tr></thead>
+            <tbody id="history-body"><tr><td colspan="4">Bấm "Xem lịch sử DynamoDB" trên thiết bị bất kỳ để tải dữ liệu...</td></tr></tbody>
+        </table>
+    </div>
+
+    <script>
+const API_BASE = "https://xcibzup2li.execute-api.us-east-1.amazonaws.com";
+
+    async function sendControl(thing, payload) {
+      const box = document.getElementById(`status-${thing}`);
+      box.innerText = "Đang gửi lệnh lên API Gateway...";
+      try {
+        const res = await fetch(`${API_BASE}/devices/${thing}/control`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        box.innerText = JSON.stringify(data, null, 2);
+        setTimeout(() => loadHistory(thing), 1500);
+      } catch (err) {
+        box.innerText = "Lỗi: " + err.message;
+      }
+    }
+
+    async function loadHistory(thing) {
+      const tbody = document.getElementById("history-body");
+      tbody.innerHTML = `<tr><td colspan="4">Đang tải lịch sử của ${thing}...</td></tr>`;
+      try {
+        const res = await fetch(`${API_BASE}/devices/${thing}/history`);
+        const data = await res.json();
+        const items = data.history || [];
+        if (!items.length) {
+          tbody.innerHTML = `<tr><td colspan="4">Chưa có bản ghi nào cho ${thing}</td></tr>`;
+          return;
+        }
+        tbody.innerHTML = items.map(item => `
+          <tr>
+            <td><b>${item.deviceId}</b></td>
+            <td>${new Date(Number(item.timestamp)).toLocaleString()} (${item.timestamp})</td>
+            <td>${item.eventType || 'SHADOW_UPDATE'}</td>
+            <td><code>${JSON.stringify(item.state)}</code></td>
+          </tr>
+        `).join("");
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="4">Lỗi tải lịch sử: ${err.message}</td></tr>`;
+      }
+    }
+    </script>
+</body>
+</html>
