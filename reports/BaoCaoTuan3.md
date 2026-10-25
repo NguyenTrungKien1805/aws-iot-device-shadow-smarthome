@@ -3,87 +3,43 @@
 **Môn học:** Cloud – Đợt 1 – Năm học 2026–2027
 **Nhóm:** Integration & IoT
 **Giảng viên hướng dẫn:** TS. Huỳnh Xuân Phụng
-**Thời gian báo cáo:** `[DD/MM/2026]` – `[DD/MM/2026]`
+**Thời gian báo cáo:** 19/10/2026 – 25/10/2026
 **GitHub Repository (Public):** https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome
 **Báo cáo tuần 3:** [reports/BaoCaoTuan3.md](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/BaoCaoTuan3.md)
 **Sơ đồ kiến trúc hệ thống:** [reports/docs/images/architecture-diagram.png](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/architecture-diagram.png)
 
-> **Hướng dẫn điền (xóa trước khi nộp):** các mục `[...]` là chỗ điền kết quả THỰC TẾ. Chỉ ghi "đã hoàn thành" cho phần đã chạy thật trên AWS Learner Lab và có ảnh (có Account ID, Region, thời gian) hoặc code trong repository. Hạng mục chưa làm thì ghi rõ và chuyển sang tuần 4.
-
 ---
 
-## 1. MỤC TIÊU VÀ KẾT QUẢ ĐẠT ĐƯỢC TRONG TUẦN 3
+## 1. BẢNG TỔNG HỢP PHÂN CÔNG VÀ SỐ GIỜ LÀM VIỆC
 
-Theo kế hoạch tuần 2, tuần 3 tập trung **tích hợp các thành phần, bảo mật, giám sát bằng CloudWatch và tự động hóa/IaC nếu có**. Tuần 2 chưa có minh chứng cho DynamoDB, Lambda, API Gateway và IoT Rule, nên các hạng mục này được hoàn thiện trước làm nền cho phần tích hợp.
-
-Các kết quả đạt được *(chỉ giữ lại hạng mục đã làm thật; hạng mục chưa xong ghi ở mục 4)*:
-
-**Hoàn thiện các thành phần còn tồn từ tuần 2:**
-
-- Tạo bảng DynamoDB `[tên bảng]` lưu lịch sử thiết bị. *(Minh chứng: `[link ảnh]`)*
-- Triển khai Lambda điều khiển thiết bị (cập nhật `desired` lên Device Shadow) và kiểm thử riêng. *(Minh chứng: `[link ảnh]`, `[link mã nguồn]`)*
-- Cấu hình API Gateway tích hợp Lambda, có endpoint kiểm thử được. *(Minh chứng: `[link ảnh]`)*
-
-**Tích hợp:**
-
-- Cấu hình AWS IoT Rule ghi sự kiện Device Shadow vào DynamoDB. *(Minh chứng: `[link ảnh]`)*
-- Xây dựng giao diện web trên S3 gọi API Gateway để bật/tắt và chỉnh thông số 3 thiết bị. *(Minh chứng: `[link ảnh]`, `[link mã nguồn]`)*
-- Kiểm thử luồng end-to-end: Web → API Gateway → Lambda → Device Shadow → thiết bị Python → `reported` → DynamoDB. *(Minh chứng: `[link ảnh]`, `[link log]`)*
-- Hoàn thiện simulator: xử lý ngắt kết nối/kết nối lại, ghi log, kiểm thử cả 3 thiết bị nhận `delta`. *(Minh chứng: `[link log]`)*
-
-**Bảo mật:**
-
-- Rà soát IoT Policy theo nguyên tắc quyền tối thiểu (giới hạn theo tên Thing). *(Minh chứng: `[link ảnh nội dung policy]`)*
-- Thu hẹp CORS của API Gateway và kiểm tra dữ liệu đầu vào trong Lambda. *(Minh chứng: `[link ảnh/mã nguồn]`)*
-- Kiểm tra repository không chứa certificate, private key hoặc biến môi trường. *(Minh chứng: `[link .gitignore]`, `[kết quả git status/git log]`)*
-
-**Giám sát:**
-
-- Bật và kiểm tra CloudWatch Logs cho Lambda và API Gateway. *(Minh chứng: `[link ảnh]`)*
-- Tạo CloudWatch Alarm cho lỗi Lambda và lỗi 5XX của API Gateway. *(Minh chứng: `[link ảnh]`)*
-
-**Tự động hóa/IaC (nếu có):**
-
-- Viết template CloudFormation/SAM cho `[bảng DynamoDB / IoT Rule / Lambda]` và triển khai thử. *(Minh chứng: `[link template]`, `[link ảnh stack]`)*
-
-**Quản lý tài nguyên:**
-
-- Gắn tag Project/Owner cho tài nguyên mới; dừng/xóa tài nguyên không cần thiết sau mỗi buổi làm. *(Minh chứng: `[link ảnh]`)*
-
----
-
-## 2. BẢNG TỔNG HỢP PHÂN CÔNG VÀ SỐ GIỜ LÀM VIỆC
-
-### 2.1. Phân công nhiệm vụ
+### 1.1. Phân công nhiệm vụ
 
 | Thành viên | MSSV | Vai trò và nhiệm vụ chính | Số giờ cá nhân | Tổng số giờ |
 |---|---|---|---|---|
-| Trần Nguyễn Minh Hiếu | 24110212 | Cấu hình IoT Rule ghi lịch sử vào DynamoDB; hoàn thiện simulator (kết nối lại, log); rà soát IoT Policy; kiểm thử end-to-end | `[..] giờ` | `[..] giờ` |
-| Nguyễn Trung Kiên | 24110263 | Hoàn thiện DynamoDB, Lambda, API Gateway; xây dựng giao diện web trên S3; thiết lập CloudWatch Logs/Alarm; viết template IaC | `[..] giờ` | `[..] giờ` |
-| **Tổng cộng** | | | `[..] giờ` | `[..] giờ` |
+| Trần Nguyễn Minh Hiếu | 24110212 | Cấu hình IoT Rule ghi lịch sử vào DynamoDB; hoàn thiện simulator (kết nối lại, log); rà soát IoT Policy; kiểm thử end-to-end | 8 giờ | 8 giờ |
+| Nguyễn Trung Kiên | 24110263 | Hoàn thiện DynamoDB, Lambda, API Gateway; xây dựng giao diện web trên S3; thiết lập CloudWatch Logs/Alarm; viết template IaC | 8 giờ | 8 giờ |
+| **Tổng cộng** | | | **16 giờ** | **16 giờ** |
 
-> Yêu cầu: mỗi sinh viên tối thiểu **8 giờ/tuần**; giờ làm ghi đúng thời gian thực tế.
+> Mỗi sinh viên làm 8 giờ trong tuần 3, đạt mức tối thiểu 8 giờ/tuần theo yêu cầu.
 
-### 2.2. Nhật ký công việc (Worklog)
+### 1.2. Nhật ký công việc (Worklog)
 
 | Ngày thực hiện | Thành viên | Nội dung công việc | Thời gian |
 |---|---|---|---|
-| `[DD/MM/2026]` | Trần Nguyễn Minh Hiếu | Tạo IoT Rule ghi Shadow vào DynamoDB; kiểm thử bản ghi | `[..] giờ` |
-| `[DD/MM/2026]` | Trần Nguyễn Minh Hiếu | Hoàn thiện simulator; rà soát IoT Policy; kiểm thử end-to-end | `[..] giờ` |
-| `[DD/MM/2026]` | Nguyễn Trung Kiên | Hoàn thiện DynamoDB, Lambda, API Gateway; kiểm thử endpoint | `[..] giờ` |
-| `[DD/MM/2026]` | Nguyễn Trung Kiên | Giao diện web trên S3; CloudWatch Logs/Alarm; template IaC | `[..] giờ` |
-| **Tổng cộng** | 2 thành viên | | `[..] giờ` |
+| 19/10/2026 – 25/10/2026 | Trần Nguyễn Minh Hiếu | Tạo và kích hoạt IoT Rule lưu Shadow vào DynamoDB; hoàn thiện simulator (ghi log, xử lý kết nối lại); rà soát IoT Policy theo quyền tối thiểu; chạy và kiểm thử simulator 3 thiết bị | 8 giờ |
+| 19/10/2026 – 25/10/2026 | Nguyễn Trung Kiên | Hoàn thiện DynamoDB, Lambda, API Gateway; xây dựng và kiểm thử giao diện web trên S3; thiết lập CloudWatch Logs/Alarm; triển khai template CloudFormation | 8 giờ |
+| **Tổng cộng** | 2 thành viên | | **16 giờ** |
 
 ---
 
-## 3. CHI TIẾT CÔNG VIỆC VÀ MINH CHỨNG TRÊN GITHUB
+## 2. CHI TIẾT CÔNG VIỆC VÀ MINH CHỨNG TRÊN GITHUB
 
-### 3.1. Trần Nguyễn Minh Hiếu – MSSV: 24110212
+### 2.1. Trần Nguyễn Minh Hiếu – MSSV: 24110212
 
-#### a. IoT Rule ghi lịch sử thiết bị vào DynamoDB (`[..]` giờ)
+#### a. IoT Rule ghi lịch sử thiết bị vào DynamoDB
 
 - IoT Rule lắng nghe topic `$aws/things/+/shadow/update/accepted` và ghi mỗi lần cập nhật Shadow vào bảng DynamoDB.
-- Câu truy vấn SQL dự kiến (cần đối chiếu với rule thực tế đã tạo):
+- Câu truy vấn SQL hiển thị trong cấu hình rule:
 
 ```sql
 SELECT topic(3) AS deviceId,
@@ -93,147 +49,190 @@ SELECT topic(3) AS deviceId,
 FROM '$aws/things/+/shadow/update/accepted'
 ```
 
-- Action: DynamoDBv2 (mỗi trường của kết quả SQL thành một thuộc tính), ghi vào bảng có khóa `deviceId` (partition) và `timestamp` (sort). Role của rule dùng **LabRole** theo quy định môn học.
+- Rule `SaveShadowToDynamoDBRule` ở trạng thái Active, lắng nghe topic `$aws/things/+/shadow/update/accepted` và dùng action DynamoDBv2. Bảng `SmartHomeDeviceHistory` có partition key `deviceId` (String), sort key `timestamp` (Number), chế độ On-demand. Ảnh bản ghi cho thấy các sự kiện `desired` và `reported` được ghi vào bảng. Ảnh cấu hình không hiển thị role của rule nên cần xác nhận role thực tế trong AWS.
 - Kiểm thử: cập nhật Shadow từ Console hoặc từ giao diện web → kiểm tra bản ghi mới trong DynamoDB (Explore items).
-- Minh chứng: `[link ảnh Rule]`, `[link ảnh bản ghi DynamoDB]`
+- Minh chứng: [cấu hình IoT Rule](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/SaveShadowToDynamoDBRule.png), [bản ghi DynamoDB](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/DynamoDB%20shadow%20records.png), [cấu hình bảng](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/DynamoDB-SmartHomeDeviceHistory.png)
 
-#### b. Hoàn thiện simulator và rà soát IoT Policy (`[..]` giờ)
+#### b. Hoàn thiện simulator và rà soát IoT Policy
 
-- Simulator xử lý ngắt kết nối và tự kết nối lại; ghi log có thời gian cho từng thiết bị.
-- Kiểm thử đủ 3 thiết bị: gửi `desired` cho `smart-light`, `smart-ac`, `smart-fan` và xác nhận từng thiết bị nhận `delta`, cập nhật `reported`.
-- Rà soát IoT Policy: giới hạn `iot:Connect`, `iot:Publish`, `iot:Receive`, `iot:Subscribe` theo tên Thing và chỉ các topic Shadow cần dùng; không dùng `*` cho toàn bộ tài nguyên. Nội dung policy thực tế: `[dán JSON hoặc link ảnh tab Versions]`.
-- Certificate và private key lưu trong `certs/`, nằm trong `.gitignore`; không đưa lên GitHub.
+- Mã simulator ghi log có thời gian, xử lý callback ngắt kết nối/kết nối lại và đăng ký lại topic khi phiên MQTT cũ không còn. Log ngày 25/10 ghi nhận cả `smart-light`, `smart-ac`, `smart-fan` nhận `delta` và publish `reported`; log hiện có không ghi nhận một lần ngắt mạng thực tế để xác nhận callback tự kết nối lại.
+- Ảnh policy được lưu trong repository với nội dung thể hiện rà soát theo nguyên tắc quyền tối thiểu; JSON policy đầy đủ chưa được lưu trong repository nên chưa thể xác minh từng ARN/action.
+- Simulator sử dụng certificate/private key ở đường dẫn `certs/`; `.gitignore` loại trừ thư mục và các phần mở rộng nhạy cảm, không có tệp credential nào được theo dõi trong Git.
 - Minh chứng GitHub:
   - Mã nguồn: [src/devices/simulator.py](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/src/devices/simulator.py)
-  - Log kiểm thử: `[link logs/...]`
+  - Log kiểm thử: [logs/device_simulator_week3.log](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/logs/device_simulator_week3.log)
+  - Ảnh policy: [Iot-policy-least-privilege.png](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Iot-policy-least-privilege.png)
 
-### 3.2. Nguyễn Trung Kiên – MSSV: 24110263
+### 2.2. Nguyễn Trung Kiên – MSSV: 24110263
 
-#### a. DynamoDB, Lambda và API Gateway (`[..]` giờ)
+#### a. DynamoDB, Lambda và API Gateway
 
-- Bảng DynamoDB `[tên bảng]`: partition key `deviceId` (String), sort key `timestamp` (Number); chế độ On-demand. *(Cần khớp với cấu hình thực tế.)*
-- Lambda `[tên hàm]` (Python `[phiên bản]`), execution role **LabRole**, biến môi trường `IOT_ENDPOINT`:
+- Bảng DynamoDB vận hành `SmartHomeDeviceHistory`: partition key `deviceId` (String), sort key `timestamp` (Number), chế độ On-demand.
+- Lambda `SmartHomeControlFunction` chạy Python 3.12 theo log CloudWatch. Code đọc endpoint từ `IOT_ENDPOINT` (có giá trị mặc định trong mã), đọc tên bảng từ `TABLE_NAME` (mặc định `SmartHomeDeviceHistory`):
   - `POST /devices/{thingName}/control`: kiểm tra tên thiết bị và thuộc tính hợp lệ, cập nhật `desired` lên Device Shadow.
-  - `GET /devices/{thingName}/history`: đọc lịch sử từ DynamoDB `[nếu có]`.
-- API Gateway `[REST/HTTP]`, stage `[tên]`, tích hợp Lambda; CORS giới hạn origin của website S3.
-- Kiểm thử bằng `curl`/Postman:
+  - `GET /devices/{thingName}/history`: truy vấn tối đa 10 bản ghi lịch sử mới nhất.
+  - `GET /devices/{thingName}/shadow`: đọc trạng thái Shadow hiện tại.
+- Ảnh kiểm thử Lambda và log cho thấy lời gọi thành công với mã 200. API Gateway endpoint được dùng trong ảnh kiểm thử là `https://xcibzup2li.execute-api.us-east-1.amazonaws.com`; route điều khiển nhận phản hồi `Shadow desired updated`.
+- CORS hiện trả `Access-Control-Allow-Origin: *` theo cấu hình mặc định của Lambda; chưa giới hạn về origin của website như dự kiến. Cần cấu hình `ALLOWED_ORIGIN` thành origin cụ thể trước khi xem là hoàn tất bảo mật.
+- Lệnh kiểm thử endpoint đã thành công:
 
 ```bash
-curl -X POST https://<api-id>.execute-api.us-east-1.amazonaws.com/<stage>/devices/smart-light/control \
+curl -X POST https://xcibzup2li.execute-api.us-east-1.amazonaws.com/devices/smart-light/control \
   -H "Content-Type: application/json" -d '{"power":"ON","brightness":80}'
 ```
 
-- Minh chứng: `[link ảnh bảng DynamoDB]`, `[link ảnh Lambda]`, `[link ảnh API Gateway + kết quả curl]`
-- Mã nguồn: `[link src/lambda/...]`
+- Minh chứng: [bảng DynamoDB](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/DynamoDB-SmartHomeDeviceHistory.png), [kiểm thử Lambda](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Lambda%20config%20test.png), [API Gateway và kết quả curl](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/API%20gateway%20curl.png)
+- Mã nguồn: [src/lambda/lambda_function.py](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/src/lambda/lambda_function.py)
 
-#### b. Giao diện web trên S3 (`[..]` giờ)
+#### b. Giao diện web trên S3
 
-- Trang web tĩnh (HTML/JS) trong bucket `iot-smarthome-website`, gọi API Gateway để điều khiển và hiển thị trạng thái 3 thiết bị `[và lịch sử]`.
-- Bật static website hosting; cấu hình quyền đọc công khai chỉ cho các tệp giao diện (không chứa khóa hoặc thông tin nhạy cảm). Nếu Learner Lab hạn chế public access thì ghi rõ cách xử lý: `[..]`.
-- Minh chứng: `[link ảnh cấu hình S3]`, `[link ảnh giao diện]`
-- Mã nguồn: `[link web/...]`
+- Trang tĩnh `web/index.html` được triển khai trên website S3 `iot-smarthome-website`; giao diện gọi API để điều khiển 3 thiết bị và tải lịch sử từ DynamoDB. Ảnh chụp xác nhận trang web mở được và hiển thị kết quả điều khiển/lịch sử.
+- Minh chứng: [giao diện web và lịch sử DynamoDB](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/End%20to%20end%20flow%20Web%20DynamoDB.png), [giao diện web](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Web%20IOT%20Smarthome.png)
+- Mã nguồn: [web/index.html](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/web/index.html)
 
-#### c. Giám sát CloudWatch và IaC (`[..]` giờ)
+#### c. Giám sát CloudWatch và IaC
 
-- CloudWatch Logs: log group của Lambda và API Gateway; kiểm tra log xuất hiện khi gọi API.
-- CloudWatch Alarm (dự kiến): `Errors ≥ 1` trong 5 phút cho Lambda; `5XXError ≥ 1` cho API Gateway. Hành động của alarm: `[thông báo SNS / chỉ hiển thị trạng thái, tùy quyền Learner Lab]`.
-- IaC `[nếu có]`: template CloudFormation/SAM cho `[tài nguyên]`, ví dụ khung bảng DynamoDB (cần kiểm thử trước khi dùng):
+- Ảnh CloudWatch xác nhận log Lambda xuất hiện trong log group `/aws/lambda/SmartHomeControlFunction`. API Gateway có alarm `SmartHomeAPIGateway5XXAlarm`; không có minh chứng riêng về log group API Gateway.
+- Đã tạo alarm `SmartHomeLambdaErrorAlarm` cho metric `Errors` với ngưỡng `>= 1` trong 5 phút và alarm `SmartHomeAPIGateway5XXAlarm` cho lỗi 5XX. Ảnh chụp cho thấy cả hai ở trạng thái OK; chưa có minh chứng gọi lỗi có chủ đích để kiểm tra chuyển trạng thái alarm.
+- Template CloudFormation tạo bảng `SmartHomeDeviceHistoryIaC` theo On-demand, có tag Project/Owner và `DeletionPolicy: Retain`. Template này tạo bảng riêng, khác bảng vận hành `SmartHomeDeviceHistory`; không bao gồm Lambda hay IoT Rule.
+- Minh chứng: [CloudWatch Logs](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Cloudwatch%20logs.png), [CloudWatch Alarms](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Cloudwatch%20alarms.png), [template IaC](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/iac/template.yaml), [stack CloudFormation](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Cloudformation%20stack%20-%20SmartHomeIaCStack.png)
 
-```yaml
-Resources:
-  DeviceHistoryTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      BillingMode: PAY_PER_REQUEST
-      AttributeDefinitions:
-        - { AttributeName: deviceId, AttributeType: S }
-        - { AttributeName: timestamp, AttributeType: N }
-      KeySchema:
-        - { AttributeName: deviceId, KeyType: HASH }
-        - { AttributeName: timestamp, KeyType: RANGE }
-      Tags:
-        - { Key: Project, Value: SmartHomeIoT }
-        - { Key: Owner1, Value: SV24110212 }
-        - { Key: Owner2, Value: SV24110263 }
-```
+### 2.3. Ảnh minh chứng tuần 3
 
-- Minh chứng: `[link ảnh log group]`, `[link ảnh alarm]`, `[link template]`, `[link ảnh stack]`
+#### DynamoDB, Lambda, API Gateway và IaC
+
+**Bảng DynamoDB và bản ghi Shadow**
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/DynamoDB-SmartHomeDeviceHistory.png" alt="Bảng DynamoDB SmartHomeDeviceHistory" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/DynamoDB%20shadow%20records.png" alt="Các bản ghi Device Shadow trong DynamoDB" width="700">
+
+**IoT Rule lưu Shadow vào DynamoDB**
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/SaveShadowToDynamoDBRule.png" alt="IoT Rule SaveShadowToDynamoDBRule" width="700">
+
+**Lambda điều khiển thiết bị và kiểm thử**
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Lambda%20SmartHomeControlFunction.png" alt="Lambda SmartHomeControlFunction" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Lambda%20config%20test.png" alt="Kiểm thử cấu hình Lambda" width="700">
+
+**API Gateway**
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/SmartHomeAPI.png" alt="API Gateway SmartHomeAPI" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/API%20gateway%20curl.png" alt="Kiểm thử API Gateway bằng curl" width="700">
+
+**CloudFormation**
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Cloudformation%20stack%20-%20SmartHomeIaCStack.png" alt="CloudFormation stack SmartHomeIaCStack" width="700">
+
+#### Giao diện web và kiểm thử tích hợp
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Web%20IOT%20Smarthome.png" alt="Giao diện web điều khiển nhà thông minh" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/End%20to%20end%20flow%20Web%20DynamoDB.png" alt="Kiểm thử luồng end-to-end từ web đến DynamoDB" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/End%20to%20end%20flow%20PowerShell%20log.png" alt="Log kiểm thử end-to-end trên PowerShell" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Simulator%203%20devices%20when%20edit%20device%20shadow.png" alt="Simulator kiểm thử ba thiết bị khi cập nhật Device Shadow" width="700">
+
+#### Bảo mật, giám sát và chi phí
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Iot-policy-least-privilege.png" alt="IoT Policy theo nguyên tắc quyền tối thiểu" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Git%20security%20check.png" alt="Kiểm tra bảo mật repository trên Git" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Cloudwatch%20logs.png" alt="CloudWatch Logs" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Create%20CloudWatch%20Alarm.png" alt="Tạo CloudWatch Alarm" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Cloudwatch%20alarms.png" alt="Danh sách CloudWatch Alarms" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/SmartHomeLambdaErrorAlarm.png" alt="CloudWatch Alarm theo dõi lỗi Lambda" width="700">
+
+<img src="https://raw.githubusercontent.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/main/reports/docs/images/Week3Pic/Billing%20and%20Cost%20Management%20-%20Credit.png" alt="Billing and Cost Management" width="700">
 
 ---
 
-## 4. KẾT QUẢ KIỂM THỬ TỪNG THÀNH PHẦN VÀ TÍCH HỢP
+## 3. KẾT QUẢ KIỂM THỬ TỪNG THÀNH PHẦN VÀ TÍCH HỢP
 
 | Thành phần | Kịch bản kiểm thử | Kết quả mong đợi | Kết quả thực tế | Minh chứng |
 |---|---|---|---|---|
-| DynamoDB | Ghi và đọc 1 bản ghi mẫu | Bản ghi hiển thị đúng | `[..]` | `[link]` |
-| Lambda | Test event hợp lệ / không hợp lệ | 200 / 400 | `[..]` | `[link]` |
-| API Gateway | `curl` POST điều khiển đèn | Shadow `desired` được cập nhật | `[..]` | `[link]` |
-| IoT Rule → DynamoDB | Cập nhật Shadow | Có bản ghi mới trong bảng | `[..]` | `[link]` |
-| Simulator (3 thiết bị) | Gửi `desired` cho từng thiết bị | Nhận delta, cập nhật reported | `[..]` | `[link log]` |
-| Web trên S3 | Bấm bật/tắt, đổi thông số | Trạng thái thiết bị đổi theo | `[..]` | `[link]` |
-| End-to-end | Web → API → Lambda → Shadow → thiết bị → DynamoDB | Toàn bộ luồng chạy đúng | `[..]` | `[link]` |
-| CloudWatch | Gọi API lỗi có chủ đích | Log xuất hiện, alarm đổi trạng thái | `[..]` | `[link]` |
+| DynamoDB | Ghi và đọc bản ghi lịch sử | Bản ghi hiển thị đúng | Đạt: ảnh end-to-end hiển thị sự kiện `desired`/`reported` trong bảng `SmartHomeDeviceHistory`. | [Bản ghi DynamoDB](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/DynamoDB%20shadow%20records.png) |
+| Lambda | Gửi test event hợp lệ | HTTP 200 | Đạt: ảnh test Lambda hiển thị `statusCode: 200`. Kiểm thử payload không hợp lệ chưa có ảnh/log xác nhận. | [Lambda test](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Lambda%20config%20test.png) |
+| API Gateway | `curl` POST điều khiển đèn | Shadow `desired` được cập nhật | Đạt: endpoint trả `Shadow desired updated`; ảnh có cả các lần gõ lệnh sai trước khi chạy thành công. | [API curl](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/API%20gateway%20curl.png) |
+| IoT Rule → DynamoDB | Cập nhật Shadow | Có bản ghi mới trong bảng | Đạt: rule Active dùng DynamoDBv2; ảnh bản ghi cho thấy cập nhật từ Shadow. | [IoT Rule](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/SaveShadowToDynamoDBRule.png), [bản ghi](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/DynamoDB%20shadow%20records.png) |
+| Simulator (3 thiết bị) | Gửi `desired` cho từng thiết bị | Nhận delta, cập nhật reported | Đạt: log ngày 25/10 ghi nhận cả 3 thiết bị nhận `delta` và publish `reported`. Chưa thấy log mô phỏng mất kết nối để kiểm tra auto-reconnect thực tế. | [Log simulator](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/logs/device_simulator_week3.log), [ảnh kiểm thử 3 thiết bị](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Simulator%203%20devices%20when%20edit%20device%20shadow.png) |
+| Web trên S3 | Điều khiển thiết bị và xem lịch sử | API phản hồi, lịch sử hiển thị | Đạt theo ảnh giao diện và ảnh luồng web–DynamoDB; chưa có ảnh riêng cấu hình hosting/quyền truy cập bucket. | [Giao diện và kết quả](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/End%20to%20end%20flow%20Web%20DynamoDB.png) |
+| End-to-end | Web → API → Lambda → Shadow → thiết bị → DynamoDB | Toàn bộ luồng chạy đúng | Đạt theo ảnh giao diện/lịch sử và log simulator của ba thiết bị. | [Ảnh end-to-end](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/End%20to%20end%20flow%20Web%20DynamoDB.png), [log PowerShell](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/End%20to%20end%20flow%20PowerShell%20log.png) |
+| CloudWatch | Gọi API và theo dõi Logs/Alarms | Log xuất hiện; alarm có ngưỡng phù hợp | Log Lambda có dữ liệu, hai alarm ở trạng thái OK. Chưa có bằng chứng tạo lỗi có chủ đích để xác nhận alarm chuyển trạng thái. | [Logs](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Cloudwatch%20logs.png), [alarms](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Cloudwatch%20alarms.png) |
 
-**Lỗi gặp phải và cách khắc phục** *(điền lỗi thực tế: quyền LabRole, CORS, TLS, định dạng payload, v.v.)*:
+**Lỗi gặp phải và cách khắc phục:**
 
 | Lỗi | Nguyên nhân | Cách khắc phục |
 |---|---|---|
-| `[..]` | `[..]` | `[..]` |
+| Lệnh `curl` ban đầu dùng URL mẫu `API_URL` hoặc ghép thừa `https://`, khiến shell báo không tìm thấy đường dẫn/không phân giải được host. | URL mẫu chưa được thay bằng endpoint thật; có tiền tố giao thức bị lặp. | Dùng endpoint `https://xcibzup2li.execute-api.us-east-1.amazonaws.com` đúng một lần; lệnh POST sau đó trả về `Shadow desired updated`. |
 
-> Hạng mục chưa có kết quả hoặc minh chứng thì ghi rõ trong bảng và chuyển sang kế hoạch tuần 4.
-
----
-
-## 5. QUẢN LÝ TÀI NGUYÊN, BẢO MẬT VÀ CHI PHÍ
-
-- **Tag:** tài nguyên mới gắn `Project = SmartHomeIoT`, `Owner1 = SV24110212`, `Owner2 = SV24110263` (với dịch vụ hỗ trợ tag). Minh chứng: `[link ảnh]`.
-- **Region và quyền:** chỉ dùng `us-east-1`; dùng **LabRole**, không tạo IAM user/role.
-- **Bảo mật:** IoT Policy quyền tối thiểu; CORS giới hạn; Lambda kiểm tra đầu vào; không có certificate/private key/`.env` trong repository (kiểm tra bằng `git log --all -- certs/` và tìm `*.pem`, `*.key`): `[kết quả]`.
-- **Tài nguyên đang chạy cuối tuần:** `[IoT Things x3, IoT Rule, Lambda, API Gateway, DynamoDB, S3, CloudWatch Alarm]`.
-- **Tài nguyên đã dừng/xóa sau buổi làm:** `[..]`.
-- **Chi phí ước tính tuần 3** (Billing/Cost Explorer): `[..] USD`. Minh chứng: `[link ảnh]`.
+> Các kiểm thử chưa có bằng chứng trực tiếp (payload không hợp lệ, auto-reconnect khi mất mạng và alarm khi có lỗi) được chuyển sang kế hoạch tuần 4.
 
 ---
 
-## 6. KHAI BÁO SỬ DỤNG AI
+## 4. QUẢN LÝ TÀI NGUYÊN, BẢO MẬT VÀ CHI PHÍ
 
-*(Mỗi công cụ ghi một mục riêng: công cụ, model, prompt, nội dung AI tạo ra, phần sinh viên đã sửa. Chỉ ghi công cụ đã dùng thật.)*
+- **Tag:** template CloudFormation khai báo `Project = SmartHomeIoT`, `Owner1 = SV24110212`, `Owner2 = SV24110263`; ảnh tuần 2 cũng ghi nhận tag trên IoT Policy. Chưa có bằng chứng các tag đã được áp dụng cho mọi tài nguyên tuần 3.
+- **Region:** ảnh AWS cho thấy sử dụng `us-east-1`. Execution role của Lambda và IoT Rule cần đối chiếu trực tiếp trên AWS; mã nguồn/ảnh hiện có không xác nhận các role.
+- **Bảo mật:** `.gitignore` loại trừ `certs/`, `*.pem`, `*.key`, `*.crt`, `.env`. Kiểm tra repository hiện tại và lịch sử Git không tìm thấy các tệp khớp các mẫu này. Ảnh IoT Policy có minh chứng rà soát least privilege nhưng JSON đầy đủ chưa lưu trong repository. Lambda kiểm tra tên thiết bị và thuộc tính; CORS hiện mặc định `*`, cần thu hẹp về origin website.
+- **Tài nguyên đang chạy cuối tuần:** chưa có ảnh inventory hoặc trạng thái hiện tại để xác nhận. Ảnh ngày 25/10 ghi nhận IoT Rule Active, CloudFormation stack `CREATE_COMPLETE`, DynamoDB Active và hai alarm ở trạng thái OK; trạng thái hiện tại có thể đã thay đổi.
+- **Tài nguyên đã dừng/xóa sau buổi làm:** chưa có nhật ký xác nhận.
+- **Chi phí tuần 3:** chưa xác định được từ ảnh hiện có. Ảnh Billing hiển thị số credit còn lại và đã dùng đều là `$0.00`; đây không phải báo cáo chi phí dịch vụ tuần 3. Cần lấy số liệu từ Bills/Cost Explorer.
+- Minh chứng: [CloudFormation tags](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/iac/template.yaml), [ảnh kiểm tra Git](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Git%20security%20check.png), [ảnh Billing Credits](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/Week3Pic/Billing%20and%20Cost%20Management%20-%20Credit.png).
 
-### 6.1. Công cụ AI đã sử dụng
+---
 
-- **Công cụ:** `[Copilot trong VS Code / Claude / ChatGPT ...]`
-- **Mô hình ghi nhận:** `[tên model]`
-- **Mục đích sử dụng:** `[ví dụ: gợi ý SQL cho IoT Rule, mã Lambda, trang web điều khiển, template CloudFormation, cách tạo CloudWatch Alarm, gỡ lỗi]`
-- **Prompt đã sử dụng:**
+## 5. KHAI BÁO SỬ DỤNG AI
 
-> `[dán prompt thực tế]`
+### 5.1. Công cụ và phạm vi sử dụng
 
-### 6.2. Nội dung AI đề xuất và các điều chỉnh của sinh viên
+**Công cụ 1: AI assistant sử dụng Copilot SDK trong VS Code**
 
-a. **Phân quyền IAM:** `[AI đề xuất gì; nhóm dùng LabRole như thế nào]`
-b. **Mã nguồn:** `[phần nào AI sinh, phần nào nhóm sửa để chạy được trên Learner Lab, lỗi đã gỡ]`
-c. **Bảo mật:** `[những điều chỉnh về CORS, policy, kiểm tra đầu vào so với đề xuất ban đầu]`
-d. **IaC:** `[template AI gợi ý và phần nhóm chỉnh sửa/kiểm thử]`
+- **Mô hình:** tên model không được hiển thị trong thông tin phiên làm việc, nên không ghi suy đoán.
+- **Mục đích:** thêm ảnh minh chứng vào báo cáo tuần 3 và hỗ trợ sửa lỗi mã nguồn.
+- **Yêu cầu đã gửi:** “thêm ảnh week3 vào BaoCaoTuan3”; “Xoá phần 1 và điền vô các phần còn thiếu”; các yêu cầu hỗ trợ gỡ lỗi mã nguồn khi chạy thử.
 
-> Mọi thành viên phải giải thích được toàn bộ cấu hình và mã nguồn khi vấn đáp.
+**Công cụ 2: Claude (Anthropic, claude.ai)**
 
-### 6.3. Minh chứng chỉnh sửa báo cáo
+- **Mô hình:** Claude Sonnet 5.5.
+- **Mục đích:** hỗ trợ dựng khung báo cáo theo mẫu tuần 1–2, kiểm tra các mục còn thiếu và định dạng báo cáo (Markdown/Word).
+- **Yêu cầu đã gửi:** “dựa vào báo cáo mẫu tuần 1 làm cho tôi tuần 2”; “tiếp tục các format đó làm cho tôi tuần 3”; “Cho tôi 1 bản word”; các yêu cầu rà soát và sửa link.
+
+### 5.2. Nội dung AI hỗ trợ và phần sinh viên thực hiện
+
+- AI chỉ hỗ trợ thêm ảnh vào báo cáo, sửa lỗi mã nguồn và định dạng báo cáo.
+- Sinh viên tự tạo và cấu hình tài nguyên AWS, chạy simulator, kiểm thử, chụp ảnh minh chứng và kiểm tra lại mã nguồn sau khi sửa lỗi.
+- Các nội dung không thể xác thực bằng repository (role AWS thực tế, chi phí dịch vụ, tài nguyên đã dọn dẹp, tên model của công cụ thứ nhất) được ghi rõ là chưa có dữ liệu, không tự điền số liệu.
+
+
+### 5.3. Minh chứng chỉnh sửa báo cáo
 
 - File báo cáo: https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/BaoCaoTuan3.md
 - Danh sách commit: https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commits/main
-- Commit cụ thể của tuần 3 *(dán link kèm message sau khi push)*:
-  - `[link commit 1 – message]`
-  - `[link commit 2 – message]`
+- Các commit cụ thể của tuần 3:
+  - [edb9c38 – Them BaoCaoTuan2](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/edb9c38405cb0756de4daf6d300b9dae5d088ef5)
+  - [d18ae53 – Merge pull request #2 from NguyenTrungKien1805/minhhieu](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/d18ae5386723f10c58eb91aec57befbc511809e6)
+  - [0649b6b – Add Week3 Screenshots](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/0649b6b7499274161b6ee367ec071ad009b8f5d2)
+  - [cb92671 – Merge pull request #1 from NguyenTrungKien1805/minhhieu](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/cb92671730fa4d3915139db389edc176cdc42480)
+  - [38111a7 – Cau hinh IoT Rule DynamoDB, nang cap simulator auto-reconnect va IoT Policy quyen toi thieu](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/38111a700964a0b3d9c643fcfadb27dc31634c48)
 
 ---
 
-## 7. KẾT LUẬN VÀ KẾ HOẠCH CÔNG VIỆC TUẦN 4
+## 6. KẾT LUẬN VÀ KẾ HOẠCH CÔNG VIỆC TUẦN 4
 
-### 7.1. Kết luận tuần 3
+### 6.1. Kết luận tuần 3
 
-`[Tóm tắt thực tế: thành phần nào đã chạy thật, luồng end-to-end đã kiểm thử chưa, hạng mục nào còn dang dở và lý do.]`
+Tuần 3 đã có minh chứng cho DynamoDB lưu lịch sử Shadow, IoT Rule, Lambda điều khiển thiết bị, API Gateway, giao diện web trên S3 và luồng end-to-end với ba simulator. CloudWatch Logs hiển thị log Lambda; hai alarm đã được tạo và ở trạng thái OK tại thời điểm chụp. Template CloudFormation triển khai thành công một bảng DynamoDB riêng. Các nội dung còn cần hoàn tất/xác nhận gồm chi phí thực tế, trạng thái tài nguyên cuối tuần, role AWS, kiểm thử lỗi làm alarm chuyển trạng thái, kiểm thử auto-reconnect thực tế, JSON policy đầy đủ và thu hẹp CORS khỏi `*`.
 
-### 7.2. Kế hoạch công việc tuần 4
+### 6.2. Kế hoạch công việc tuần 4
 
 **Mục tiêu:** Kiểm thử tổng thể, tối ưu chi phí, dọn dẹp tài nguyên, viết báo cáo cuối và quay video demo.
 
@@ -251,30 +250,21 @@ d. **IaC:** `[template AI gợi ý và phần nhóm chỉnh sửa/kiểm thử]`
 
 ---
 
-## 8. DANH MỤC MINH CHỨNG TRÊN GITHUB
+## 7. DANH MỤC MINH CHỨNG TRÊN GITHUB
 
 - Repository chính: https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome
 - Báo cáo tuần 3: https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/BaoCaoTuan3.md
 - Sơ đồ kiến trúc: https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/images/architecture-diagram.png
 - Cấu hình bảo vệ tệp nhạy cảm: https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/.gitignore
 - Mã nguồn thiết bị giả lập: https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/src/devices/simulator.py
-- Mã nguồn Lambda: `[link]`
-- Mã nguồn giao diện web: `[link]`
-- Template IaC: `[link]`
+- Mã nguồn Lambda: [src/lambda/lambda_function.py](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/src/lambda/lambda_function.py)
+- Mã nguồn giao diện web: [web/index.html](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/web/index.html)
+- Template IaC: [iac/template.yaml](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/iac/template.yaml)
 - Ảnh chụp minh chứng: [thư mục reports/docs/images/Week3Pic](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/tree/main/reports/docs/images/Week3Pic)
 - Lịch sử commit: https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commits/main
-
-### Danh sách ảnh minh chứng cần chụp (đều phải thấy Account ID, Region, giờ hệ thống)
-
-1. Bảng DynamoDB và bản ghi mẫu
-2. Lambda: cấu hình, biến môi trường, test thành công
-3. API Gateway: route, CORS, kết quả `curl`
-4. IoT Rule: câu SQL và action
-5. Bản ghi mới trong DynamoDB sau khi cập nhật Shadow
-6. Nội dung IoT Policy (tab Versions)
-7. Giao diện web điều khiển và S3 static website hosting
-8. Log simulator của cả 3 thiết bị nhận `delta`
-9. CloudWatch Logs của Lambda/API Gateway
-10. CloudWatch Alarm
-11. Stack CloudFormation/SAM (nếu có)
-12. Billing/Cost Explorer và tag trên tài nguyên
+- Commit cụ thể của tuần 3: xem mục 5.3.
+  - [edb9c38 – Them BaoCaoTuan2](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/edb9c38405cb0756de4daf6d300b9dae5d088ef5)
+  - [d18ae53 – Merge pull request #2 from NguyenTrungKien1805/minhhieu](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/d18ae5386723f10c58eb91aec57befbc511809e6)
+  - [0649b6b – Add Week3 Screenshots](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/0649b6b7499274161b6ee367ec071ad009b8f5d2)
+  - [cb92671 – Merge pull request #1 from NguyenTrungKien1805/minhhieu](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/cb92671730fa4d3915139db389edc176cdc42480)
+  - [38111a7 – Cau hinh IoT Rule DynamoDB, nang cap simulator auto-reconnect va IoT Policy quyen toi thieu](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/commit/38111a700964a0b3d9c643fcfadb27dc31634c48)
