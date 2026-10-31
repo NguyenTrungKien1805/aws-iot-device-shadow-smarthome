@@ -1,0 +1,14 @@
+{
+  "state": {
+    "desired": {
+      "welcome": "aws-iot",
+      "power": "ON",
+      "speed": 2
+    },
+    "reported": {
+      "welcome": "aws-iot",
+      "power": "ON",
+      "speed": 2
+    }
+  }
+}
