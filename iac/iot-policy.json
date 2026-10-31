@@ -1,0 +1,38 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "iot:Connect",
+      "Resource": [
+        "arn:aws:iot:us-east-1:143615885844:client/smart-light",
+        "arn:aws:iot:us-east-1:143615885844:client/smart-ac",
+        "arn:aws:iot:us-east-1:143615885844:client/smart-fan"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Publish",
+        "iot:Receive"
+      ],
+      "Resource": [
+        "arn:aws:iot:us-east-1:143615885844:topic/$aws/things/smart-light/shadow/update",
+        "arn:aws:iot:us-east-1:143615885844:topic/$aws/things/smart-light/shadow/update/*",
+        "arn:aws:iot:us-east-1:143615885844:topic/$aws/things/smart-ac/shadow/update",
+        "arn:aws:iot:us-east-1:143615885844:topic/$aws/things/smart-ac/shadow/update/*",
+        "arn:aws:iot:us-east-1:143615885844:topic/$aws/things/smart-fan/shadow/update",
+        "arn:aws:iot:us-east-1:143615885844:topic/$aws/things/smart-fan/shadow/update/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iot:Subscribe",
+      "Resource": [
+        "arn:aws:iot:us-east-1:143615885844:topicfilter/$aws/things/smart-light/shadow/update/delta",
+        "arn:aws:iot:us-east-1:143615885844:topicfilter/$aws/things/smart-ac/shadow/update/delta",
+        "arn:aws:iot:us-east-1:143615885844:topicfilter/$aws/things/smart-fan/shadow/update/delta"
+      ]
+    }
+  ]
+}

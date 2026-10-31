@@ -1,0 +1,16 @@
+{
+	"state": {
+		"desired": {
+			"welcome": "aws-iot",
+			"power": "ON",
+			"temperature": 25,
+			"mode": "cool"
+		},
+		"reported": {
+			"welcome": "aws-iot",
+			"power": "ON",
+			"temperature": 25,
+			"mode": "cool"
+		}
+	}
+}
