@@ -17,7 +17,7 @@
 
 ## Kiến trúc hệ thống
 
-![Sơ đồ kiến trúc hệ thống](reports/docs/images/architecture-diagram.png)
+![Sơ đồ kiến trúc hệ thống](reports/docs/architecture-diagram.png)
 
 ### Luồng hoạt động End-to-End:
 1. **Người dùng (Web Dashboard trên Amazon S3):** Truy cập giao diện web tĩnh và gửi lệnh bật/tắt hoặc thay đổi thông số của 3 thiết bị (`smart-light`, `smart-ac`, `smart-fan`).
@@ -49,27 +49,35 @@
 
 ```text
 aws-iot-device-shadow-smarthome/
-├── certs/                            # Chứa chứng chỉ X.509 & Private Key (Đã chặn trong .gitignore)
-├── iac/                              # Cấu hình hạ tầng (IaC) & Chính sách bảo mật
-│   ├── template.yaml                 # CloudFormation Template khởi tạo bảng DynamoDB
-│   ├── iot-policy.json               # Nội dung SmartHomeDevicePolicy (Least Privilege)
-│   └── s3-bucket-policy.json         # Chính sách đọc công khai cho S3 Static Website
-├── logs/                             # Nhật ký hoạt động (Log) thực tế của 3 thiết bị giả lập
-│   ├── device_simulator.log          # Log kiểm thử Tuần 2
-│   └── device_simulator_week3.log    # Log kiểm thử Tuần 3 (Auto-reconnect & 3 devices)
-├── reports/                          # Báo cáo tiến độ hàng tuần & minh chứng
-│   ├── BaoCaoTuan2.md                # Báo cáo tiến độ Tuần 2
-│   ├── BaoCaoTuan3.md                # Báo cáo tiến độ Tuần 3
-│   └── docs/                         # Hình ảnh chụp màn hình minh chứng & sơ đồ kiến trúc
-├── src/                              # Mã nguồn chính của hệ thống
+├── certs/                                    # Chứa chứng chỉ X.509 & Private Key (Đã chặn trong .gitignore)
+├── devices/
+│   └── .gitkeep                              # Giữ cấu trúc thư mục thiết bị trên Git
+├── iac/                                      # Cấu hình hạ tầng (IaC) & Chính sách bảo mật
+│   ├── iot-policy.json                       # Nội dung SmartHomeDevicePolicy (Least Privilege)
+│   ├── s3-bucket-policy.json                 # Chính sách đọc công khai cho S3 Static Website
+│   └── template.yaml                         # CloudFormation Template khởi tạo bảng DynamoDB
+├── logs/                                     # Nhật ký hoạt động (Log) thực tế của 3 thiết bị giả lập
+│   ├── device_simulator.log                  # Log kiểm thử kết nối & đồng bộ Shadow Tuần 2
+│   └── device_simulator_week3.log            # Log kiểm thử Tuần 3 & 4 (Auto-reconnect & 3 devices)
+├── reports/                                  # Báo cáo tiến độ hàng tuần, báo cáo cuối kỳ & minh chứng
+│   ├── BaoCaoTuan1.md                        # Báo cáo tiến độ Tuần 1
+│   ├── BaoCaoTuan2.md                        # Báo cáo tiến độ Tuần 2
+│   ├── BaoCaoTuan3.md                        # Báo cáo tiến độ Tuần 3
+│   ├── BaoCaoTuan4.md                        # Báo cáo tổng kết cuối kỳ (Tuần 4)
+│   └── docs/
+│       ├── architecture-diagram.png          # Sơ đồ kiến trúc tổng thể của hệ thống
+│       └── images/                           # Hình ảnh chụp màn hình minh chứng (Week1Pic -> Week4Pic)
+├── src/                                      # Mã nguồn chính của hệ thống
 │   ├── devices/
-│   │   └── simulator.py              # Trình giả lập 3 thiết bị IoT (MQTT mTLS, Shadow, Auto-reconnect)
+│   │   └── simulator.py                      # Trình giả lập 3 thiết bị IoT (MQTT mTLS, Shadow, Auto-reconnect)
 │   └── lambda/
-│       └── lambda_function.py        # Hàm Lambda xử lý API điều khiển & truy vấn lịch sử DynamoDB
-├── tests/                            # Dữ liệu mẫu phục vụ kiểm thử (Test payloads)
-│   ├── lambda-test-event.json        # Event JSON kiểm thử hàm Lambda
-│   └── shadow-desired-sample.json    # Mẫu JSON cập nhật trạng thái Device Shadow
-├── web/                              # Giao diện người dùng (Frontend)
-│   └── index.html                    # Bảng điều khiển Smart Home & xem lịch sử thiết bị
-├── .gitignore                        # Chặn tuyệt đối các tệp khóa bảo mật (*.pem, *.key, certs/, .env)
-└── README.md                         # Tài liệu hướng dẫn tổng quan của dự án
+│       └── lambda_function.py                # Hàm Lambda xử lý API điều khiển & truy vấn lịch sử DynamoDB
+├── tests/                                    # Dữ liệu mẫu phục vụ kiểm thử (Test payloads)
+│   ├── lambda-test-event.json                # Event JSON kiểm thử hàm Lambda
+│   ├── shadow-desired-smart-ac.json          # Mẫu JSON cập nhật trạng thái desired cho smart-ac
+│   ├── shadow-desired-smart-fan.json         # Mẫu JSON cập nhật trạng thái desired cho smart-fan
+│   └── shadow-desired-smart-light.json       # Mẫu JSON cập nhật trạng thái desired cho smart-light
+├── web/                                      # Giao diện người dùng (Frontend)
+│   └── index.html                            # Bảng điều khiển Smart Home & xem lịch sử thiết bị trên S3
+├── .gitignore                                # Chặn tuyệt đối các tệp khóa bảo mật (*.pem, *.key, certs/, .env)
+└── README.md                                 # Tài liệu hướng dẫn tổng quan của dự án
