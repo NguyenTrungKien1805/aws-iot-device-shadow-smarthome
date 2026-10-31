@@ -101,7 +101,7 @@ def create_device_connection(thing_name):
     return mqtt_conn
 
 if __name__ == "__main__":
-    print("=== KHOI DONG SIMULATOR TUAN 3 (HO TRO AUTO-RECONNECT & LOGGING) ===")
+    print("======== KHOI DONG SIMULATOR ========")
     try:
         for thing in DEVICES_STATE.keys():
             connections[thing] = create_device_connection(thing)
