@@ -1,0 +1,17 @@
+{
+  "state": {
+    "desired": {
+      "welcome": "aws-iot",
+      "power": "ON",
+      "brightness": 80
+    },
+    "reported": {
+      "welcome": "aws-iot",
+      "power": "ON",
+      "brightness": 85
+    },
+    "delta": {
+      "brightness": 80
+    }
+  }
+}
