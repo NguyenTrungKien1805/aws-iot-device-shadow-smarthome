@@ -17,7 +17,7 @@
 
 ## Kiến trúc hệ thống
 
-![Sơ đồ kiến trúc hệ thống]([reports/docs/images/architecture-diagram.png](https://github.com/NguyenTrungKien1805/aws-iot-device-shadow-smarthome/blob/main/reports/docs/architecture-diagram.png))
+![Sơ đồ kiến trúc hệ thống](reports/docs/architecture-diagram.png)
 
 ### Luồng hoạt động End-to-End:
 1. **Người dùng (Web Dashboard trên Amazon S3):** Truy cập giao diện web tĩnh và gửi lệnh bật/tắt hoặc thay đổi thông số của 3 thiết bị (`smart-light`, `smart-ac`, `smart-fan`).
